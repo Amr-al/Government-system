@@ -31,7 +31,7 @@ export const ShowBook = () => {
       window.location.replace("/");
     setUser(jwtDecode(token).fullName);
     let get = async () => {
-      let res = await fetch(`http://31.187.72.67/form/${id}`, {
+      let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/${id}`, {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,

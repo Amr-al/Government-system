@@ -20,7 +20,7 @@ export const EditForm = () => {
     if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("edit"))
       window.location.replace("/");
     let get = async () => {
-      let res = await fetch(`http://31.187.72.67/form/${id}`, {
+      let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/${id}`, {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -33,7 +33,7 @@ export const EditForm = () => {
        // console.log(res);
       }
 
-      res = await fetch("http://31.187.72.67/class/", {
+      res = await fetch("https://adventurous-erin-long-johns.cyclic.app/class/", {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -64,7 +64,7 @@ export const EditForm = () => {
       formdata.append(key, value);
     }
     let token = Cookies.get("auth");
-    let res = await fetch(`http://31.187.72.67/form/edit/${id}`, {
+    let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/edit/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

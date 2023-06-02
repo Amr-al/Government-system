@@ -20,7 +20,7 @@ export const Lists = () => {
     if (!token) window.location.replace("/");
     setUser(jwtDecode(token));
     const get = async () => {
-      let res = await fetch("http://31.187.72.67/form/?page=1&limit=30 ", {
+      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/form/?page=1&limit=30 ", {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -39,7 +39,7 @@ export const Lists = () => {
   }, []);
   const handelDelete = async (id) => {
     let token = Cookies.get("auth");
-    let res = await fetch(`http://31.187.72.67/form/delete/${id}`, {
+    let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/delete/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `token ${token}`,

@@ -34,7 +34,7 @@ export const Print = (props) => {
       setMyData({ husbandName: props.husbandName, fullName: props.fullName });
     } else {
       let get = async () => {
-        let res = await fetch(`http://31.187.72.67/form/${id}`, {
+        let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -54,7 +54,7 @@ export const Print = (props) => {
     e.preventDefault();
     let token = Cookies.get("auth");
     let res = await axios.post(
-      "http://31.187.72.67/form/create",
+      "https://adventurous-erin-long-johns.cyclic.app/form/create",
       {
         fullName: props.fullName,
         husbandName: props.husbandName,

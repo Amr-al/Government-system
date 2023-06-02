@@ -100,7 +100,7 @@ export const Profile = () => {
       window.location.replace("/");
 
     const get = async () => {
-      let res = await fetch(`http://31.187.72.67/auth/${id}`, {
+      let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/auth/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -159,7 +159,7 @@ export const Profile = () => {
     setRole([... new Set(tmp)])
     formdata.append("role", role);
     try {
-      let res = await fetch(`http://31.187.72.67/auth/edit/${id}`, {
+      let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/auth/edit/${id}`, {
         method: "POST",
         headers: {
           authorization: `token ${token}`,

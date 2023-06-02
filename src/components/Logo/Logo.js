@@ -12,7 +12,7 @@ export const Logo = () => {
     if (!token) window.location.replace("/");
     if (!jwtDecode(token).admin && !jwtDecode(token).role.includes('setting') ) window.location.replace("/");
     const get = async () => {
-      let res = await fetch("http://31.187.72.67/auth/logo", {
+      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/auth/logo", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const Logo = () => {
     const formdata = new FormData();
     formdata.append("file", file);
     let token = Cookies.get("auth");
-    let res = await fetch("http://31.187.72.67/auth/logo", {
+    let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/auth/logo", {
       method: "POST",
       headers: {
         Authorization: `token ${token}`,

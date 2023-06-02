@@ -9,7 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState();
   const handelSubmit = async (e) => {
     e.preventDefault();
-    let res = await fetch("http://31.187.72.67/auth/signin", {
+    let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/auth/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

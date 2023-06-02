@@ -5,7 +5,7 @@ export const Modal = (props) => {
   const handelSubmit = async(e)=>{
     e.preventDefault();
     let token = Cookies.get("auth");
-    let res = await fetch(`http://31.187.72.67/auth/${props.id}`, {
+    let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/auth/${props.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

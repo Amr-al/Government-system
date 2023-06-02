@@ -92,7 +92,7 @@ export const UserModal = (props) => {
     }
     formdata.append("role", role);
     try{
-    let res = await fetch("http://31.187.72.67/auth/signup", {
+    let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/auth/signup", {
       method: "POST",
       body: formdata,
     });
