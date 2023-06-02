@@ -18,7 +18,7 @@ export const AddForm = () => {
     if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("add"))
       window.location.replace("/");
     let get = async () => {
-      let res = await fetch("http://31.187.72.67/class/", {
+      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/class/", {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -37,7 +37,7 @@ export const AddForm = () => {
         setAdress(tmp);
         setClass(tmp2);
       }
-      res = await fetch("http://31.187.72.67/form/ ", {
+      res = await fetch("https://adventurous-erin-long-johns.cyclic.app/form/ ", {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -67,7 +67,7 @@ export const AddForm = () => {
     }
     formdata.append("formNumber", num + 1);
     let token = Cookies.get("auth");
-    let res = await axios.post("http://31.187.72.67/form/create",formdata, {
+    let res = await axios.post("https://adventurous-erin-long-johns.cyclic.app/form/create",formdata, {
       headers: {
         Authorization: `token ${token}`,
       },
