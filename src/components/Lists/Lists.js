@@ -20,35 +20,41 @@ export const Lists = () => {
     if (!token) window.location.replace("/");
     setUser(jwtDecode(token));
     const get = async () => {
-      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/form/?page=1&limit=30 ", {
-        method: "GET",
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      });
+      let res = await fetch(
+        "https://adventurous-erin-long-johns.cyclic.app/form/?page=1&limit=30 ",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `token ${token}`,
+          },
+        }
+      );
       if (res.status == 200) {
         res = await res.json();
         setData(res.slice(0, 30));
         setAll(res);
         setLen(res.length);
       } else {
-       // console.log(res);
+        // console.log(res);
       }
     };
     get();
   }, []);
   const handelDelete = async (id) => {
     let token = Cookies.get("auth");
-    let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/delete/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `token ${token}`,
-      },
-    });
+    let res = await fetch(
+      `https://adventurous-erin-long-johns.cyclic.app/form/delete/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `token ${token}`,
+        },
+      }
+    );
     if (res.status == 200) {
       window.location.reload();
     } else {
-     // console.log(res);
+      // console.log(res);
     }
   };
   let token = Cookies.get("auth");
@@ -56,16 +62,22 @@ export const Lists = () => {
     e.preventDefault();
     setCur(1);
     let tmp = [];
-  //  console.log(search);
+    //  console.log(search);
     for (let i = 0; i < all.length; ++i) {
       let tmm = true;
-      if (search.fullName != "" || search.husbandName != "")
+      if (
+        (search.fullName && search.fullName != "") ||
+        (search.husbandName && search.husbandName != "")
+      ) {
         tmm =
-          (all[i]["fullName"] != "" && search.fullName != "" && 
+          (all[i]["fullName"] != "" &&
+            search.fullName != "" &&
             String(all[i]["fullName"]).includes(search.fullName)) ||
-          (all[i]["husbandName"] != "" && search.husbandName != "" &&
+          (all[i]["husbandName"] != "" &&
+            search.husbandName != "" &&
             String(all[i]["husbandName"]).includes(search.husbandName));
-  //      console.log(tmm, search.fullName , search.husbandName);
+      }
+      //      console.log(tmm, search.fullName , search.husbandName);
       if (tmm) tmp.push(all[i]);
       if (tmp.length == 30) break;
     }
@@ -114,9 +126,19 @@ export const Lists = () => {
       x = 0;
     let start = currentPage * 30;
     for (let i = 0; i < all.length; ++i) {
-      let tmm =
-        String(all[i]["fullName"]).includes(search.fullName) ||
-        String(all[i]["husbandName"]).includes(search.husbandName);
+      let tmm = true;
+      if (
+        (search.fullName && search.fullName != "") ||
+        (search.husbandName && search.husbandName != "")
+      ) {
+        tmm =
+          (all[i]["fullName"] != "" &&
+            search.fullName != "" &&
+            String(all[i]["fullName"]).includes(search.fullName)) ||
+          (all[i]["husbandName"] != "" &&
+            search.husbandName != "" &&
+            String(all[i]["husbandName"]).includes(search.husbandName));
+      }
       if (tmm) x++;
       if (tmm && x >= start) tmp.push(all[i]);
       if (tmp.length == 30) break;
@@ -153,9 +175,19 @@ export const Lists = () => {
     let start = (currentPage - 2) * 30;
 
     for (let i = 0; i < all.length; ++i) {
-      let tmm =
-        String(all[i]["fullName"]).includes(search.fullName) ||
-        String(all[i]["husbandName"]).includes(search.husbandName);
+      let tmm = true;
+      if (
+        (search.fullName && search.fullName != "") ||
+        (search.husbandName && search.husbandName != "")
+      ) {
+        tmm =
+          (all[i]["fullName"] != "" &&
+            search.fullName != "" &&
+            String(all[i]["fullName"]).includes(search.fullName)) ||
+          (all[i]["husbandName"] != "" &&
+            search.husbandName != "" &&
+            String(all[i]["husbandName"]).includes(search.husbandName));
+      }
       if (tmm) x++;
       if (tmm && x >= start) tmp.push(all[i]);
       if (tmp.length == 30) break;
