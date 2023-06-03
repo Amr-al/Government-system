@@ -244,29 +244,7 @@ export const AddForm = () => {
           ></input>
           <label> رقم الاستماره </label>
           <input type="text" placeholder={num + 1} disabled></input>
-          <label>
-            <div
-              style={{
-                width: "5rem",
-                float: "right",
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "20px",
-              }}
-            >
-              مستفيد
-              <input
-                type="checkbox"
-                style={{ marginTop: "10px" }}
-                onChange={(e) => {
-                  setData({
-                    ...data,
-                    beneficiary: data.beneficiary ? false : true,
-                  });
-                }}
-              />
-            </div>
-          </label>
+          
           <button type="submit" disabled={clk}>{clk? "تحميل..." :"اضافه +"} </button>
         </form>
       </div>

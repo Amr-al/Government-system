@@ -138,7 +138,7 @@ export const UserModal = (props) => {
             required
           ></input>
 
-          <label> الاسم الكامل*</label>
+          <label> الاسم الكامل</label>
           <input
             type="text"
             onChange={(e) => {
@@ -155,13 +155,13 @@ export const UserModal = (props) => {
             }}
           ></input>
 
-          <label> الايميل</label>
+          {/* <label> الايميل</label>
           <input
             type="email"
             onChange={(e) => {
               setData({ ...data, email: e.target.value });
             }}
-          ></input>
+          ></input> */}
           <label>الصورة الشخصية </label>
           <input
             type="file"

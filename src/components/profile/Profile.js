@@ -306,13 +306,13 @@ export const Profile = () => {
                 setData({ ...data, name: e.target.value });
               }}
             ></input>
-            <div className={style.lebl}> الايميل</div>
+            <div className={style.lebl}> الاسم الكامل</div>
 
             <input
-              type="email"
-              placeholder={user.email}
+              type="text"
+              placeholder={user.fullName}
               onChange={(e) => {
-                setData({ ...data, email: e.target.value });
+                setData({ ...data, fullName: e.target.value });
               }}
             ></input>
             <div className={style.lebl}> رقم الهاتف</div>

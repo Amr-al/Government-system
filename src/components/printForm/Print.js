@@ -58,6 +58,7 @@ export const Print = (props) => {
       {
         fullName: props.fullName,
         husbandName: props.husbandName,
+        b : true
       },
       {
         headers: {
@@ -67,7 +68,9 @@ export const Print = (props) => {
     );
     if (res.status == 200) {
       //   res = await res.json()
+      console.log(data);
       setId(res.data);
+      setMyData(res.data)
 
       //window.location.replace("/forms");
     } else {
@@ -196,7 +199,7 @@ export const Print = (props) => {
           </p>
           <div className={style.qr}>
             <QRCode
-              value={`${window.location.hostname}/form/show/${id}`}
+              value={ `http://${window.location.hostname}/form/show/${id}`}
               style={{ height: "100px" }}
             />
           </div>
@@ -205,6 +208,7 @@ export const Print = (props) => {
             <div>اسم الموظف المسوؤل</div>
             <div>{date}</div>
           </div>
+          <p style={{textAlign:'right',marginRight:'20px'}}>  <b>ملاحظه :</b> الاستمارة خالية من الحك والشطب وفي حال ذلك تعترب مزورة </p>
         </div>
         <div className={style.Scontainer}>
           <h3 style={{ lineHeight: "20px", textDecoration: "underline" }}>

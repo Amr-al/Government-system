@@ -9,7 +9,7 @@ export const Nav = (props) => {
   useEffect(()=>{
     let token = Cookies.get('auth')
     setImage(jwtDecode(token).image)
-    setName(jwtDecode(token).fullName)
+    setName(jwtDecode(token).name)
   },[])
   if(!image) return <></>
   return (

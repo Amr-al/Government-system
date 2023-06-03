@@ -10,15 +10,19 @@ export const Logo = () => {
   useEffect(() => {
     let token = Cookies.get("auth");
     if (!token) window.location.replace("/");
-    if (!jwtDecode(token).admin && !jwtDecode(token).role.includes('setting') ) window.location.replace("/");
+    if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("setting"))
+      window.location.replace("/");
     const get = async () => {
-      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/auth/logo", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `token ${token}`,
-        },
-      });
+      let res = await fetch(
+        "https://adventurous-erin-long-johns.cyclic.app/auth/logo",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `token ${token}`,
+          },
+        }
+      );
       if (res.status == 200) {
         res = await res.json();
         setLogo(res);
@@ -42,13 +46,17 @@ export const Logo = () => {
     const formdata = new FormData();
     formdata.append("file", file);
     let token = Cookies.get("auth");
-    let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/auth/logo", {
-      method: "POST",
-      headers: {
-        Authorization: `token ${token}`,
-      },
-      body: formdata,
-    });
+    let res = await fetch(
+      "https://adventurous-erin-long-johns.cyclic.app/auth/logo",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `token ${token}`,
+          mode: 'no-cors'
+        },
+        body: formdata,
+      }
+    );
     if (res.status == 200) {
       res = await res.json();
 
@@ -58,7 +66,7 @@ export const Logo = () => {
   //if(!len) return <div className={style.loader}></div>
   return (
     <>
-      <Nav name = "العامه" number="000"/>
+      <Nav name="العامه" number="000" />
       <div className={style.LOcontainer}>
         <div style={{ border: "1px solid white", borderRadius: "20px" }}>
           <h2>معلومات اساسية</h2>

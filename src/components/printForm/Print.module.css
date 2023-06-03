@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 20px;
+  margin-top: 10px;
   font-weight: 900;
   font-size: 20px;
   font-family: "Cairo";
@@ -57,7 +57,7 @@
 }
 .topW div {
   text-align: end;
-  line-height: 30px;
+  line-height: 25px;
 }
 .head {
   text-align: center;
@@ -93,18 +93,18 @@
   text-align: right;
   width: 90%;
   margin: auto;
-  margin-bottom: 70px;
+  margin-bottom: 60px;
 }
 .qr {
   display: flex;
   justify-content: center;
-  margin-bottom: 70px;
+  margin-bottom: 45px;
 }
 .footer {
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  line-height: 33px;
+  line-height: 30px;
 }
 
 .Scontainer {

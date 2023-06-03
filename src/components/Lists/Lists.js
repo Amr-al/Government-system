@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { Nav } from "../Nav/Nav";
 import jwtDecode from "jwt-decode";
 import { Print } from "../printForm/Print";
+import { DeleteModal } from "../deleteModal/DeleteModal";
 export const Lists = () => {
   const [user, setUser] = useState(null);
   const [data, setData] = useState(null);
@@ -14,6 +15,8 @@ export const Lists = () => {
   const [len, setLen] = useState(0);
   const [currentPage, setCur] = useState(1);
   const [check, setCheck] = useState(false);
+  const [clk, setClk] = useState(false);
+  const [id,setId] = useState('')
 
   useEffect(() => {
     let token = Cookies.get("auth");
@@ -250,7 +253,10 @@ export const Lists = () => {
                     <i
                       className="fa fa-trash"
                       style={{ fontSize: "1.2rem", cursor: "pointer" }}
-                      onClick={() => handelDelete(data._id)}
+                      onClick={() => {
+                        setId(data._id);
+                        setClk(true);
+                      }}
                     ></i>
                   )}
                   {(user.admin || user.role.includes("edit")) && (
@@ -305,6 +311,20 @@ export const Lists = () => {
                 </div>
                 <div className={style.girdItem2}>
                   <div> {data.fullName}</div>{" "}
+                  {!data.beneficiary && (
+                    <p
+                      style={{
+                        backgroundColor: "yellow",
+                        fontWeight: "600",
+                        width: "80%",
+                        margin: "auto",
+                        borderRadius: "10px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      غير مستفيد
+                    </p>
+                  )}
                   <h5>
                     <i>
                       اسم الزوج : {data.husbandName ? data.husbandName : ""}
@@ -345,6 +365,7 @@ export const Lists = () => {
           </div>
         </div>
       </div>
+      {clk && <DeleteModal setClk={setClk} id = {id} />}
     </>
   );
 };

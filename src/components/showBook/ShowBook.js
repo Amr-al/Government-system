@@ -31,12 +31,15 @@ export const ShowBook = () => {
       window.location.replace("/");
     setUser(jwtDecode(token).fullName);
     let get = async () => {
-      let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/${id}`, {
-        method: "GET",
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      });
+      let res = await fetch(
+        `https://adventurous-erin-long-johns.cyclic.app/form/${id}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `token ${token}`,
+          },
+        }
+      );
 
       if (res.status == 200) {
         res = await res.json();
@@ -122,7 +125,7 @@ export const ShowBook = () => {
           </p>
           <div className={style.qr}>
             <QRCode
-              value={`${window.location.hostname}/form/show/${id}`}
+              value={`http://${window.location.hostname}/form/show/${id}`}
               style={{ height: "100px" }}
             />
           </div>
@@ -131,6 +134,11 @@ export const ShowBook = () => {
             <div>اسم الموظف المسوؤل</div>
             <div>{date}</div>
           </div>
+          <p style={{ textAlign: "right", marginRight: "20px" }}>
+            {" "}
+            <b>ملاحظه :</b> الاستمارة خالية من الحك والشطب وفي حال ذلك تعترب
+            مزورة{" "}
+          </p>
         </div>
       </div>
     </>
