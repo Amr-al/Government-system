@@ -16,7 +16,7 @@ export const Lists = () => {
   const [currentPage, setCur] = useState(1);
   const [check, setCheck] = useState(false);
   const [clk, setClk] = useState(false);
-  const [id,setId] = useState('')
+  const [id, setId] = useState("");
 
   useEffect(() => {
     let token = Cookies.get("auth");
@@ -80,10 +80,35 @@ export const Lists = () => {
             search.husbandName != "" &&
             String(all[i]["husbandName"]).includes(search.husbandName));
       }
-      //      console.log(tmm, search.fullName , search.husbandName);
+      if (search.fullName && search.fullName != "") {
+        tmm = tmm ||String(all[i]["area"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["assignDate"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["formNumber"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["pieceNumber"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["department"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["paperNumber"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["recordNumber"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["motherName"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["classType"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["addressNubmer"]).includes(search.fullName);
+        tmm = tmm ||String(all[i]["birthPlace"]).includes(search.fullName);
+      }
+      if (search.husbandName && search.husbandName != ""){
+        tmm = tmm || String(all[i]["area"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["assignDate"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["formNumber"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["pieceNumber"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["department"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["paperNumber"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["recordNumber"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["motherName"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["classType"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["birthPlace"]).includes(search.husbandName);
+      }
       if (tmm) tmp.push(all[i]);
       if (tmp.length == 30) break;
     }
+    console.log(tmp);
     setData(tmp);
     // let res = await fetch(`http://127.0.0.1:8000/form/filter/?page=${currentPage}`, {
     //   method: "POST",
@@ -142,12 +167,37 @@ export const Lists = () => {
             search.husbandName != "" &&
             String(all[i]["husbandName"]).includes(search.husbandName));
       }
+      if (search.fullName && search.fullName != "") {
+        tmm = tmm || String(all[i]["area"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["assignDate"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["formNumber"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["pieceNumber"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["department"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["paperNumber"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["recordNumber"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["motherName"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["classType"]).includes(search.fullName);
+        tmm = tmm || String(all[i]["birthPlace"]).includes(search.fullName);
+      }
+      if (search.husbandName && search.husbandName != "") {
+        tmm = tmm || String(all[i]["area"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["assignDate"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["formNumber"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["pieceNumber"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["department"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["paperNumber"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["recordNumber"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["motherName"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["classType"]).includes(search.husbandName);
+        tmm = tmm || String(all[i]["birthPlace"]).includes(search.husbandName);
+      }
       if (tmm) x++;
       if (tmm && x >= start) tmp.push(all[i]);
       if (tmp.length == 30) break;
     }
+    setData(tmp);
     if (tmp.length) {
-      setData(tmp);
+      
       setCur((prev) => prev + 1);
       // setLen(start + tmp.length);
     }
@@ -190,6 +240,30 @@ export const Lists = () => {
           (all[i]["husbandName"] != "" &&
             search.husbandName != "" &&
             String(all[i]["husbandName"]).includes(search.husbandName));
+        if (search.fullName && search.fullName != "") {
+          tmm = tmm || String(all[i]["area"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["assignDate"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["formNumber"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["pieceNumber"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["department"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["paperNumber"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["recordNumber"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["motherName"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["classType"]).includes(search.fullName);
+          tmm = tmm || String(all[i]["birthPlace"]).includes(search.fullName);
+        }
+        if (search.husbandName && search.husbandName != "") {
+          tmm = tmm || String(all[i]["area"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["assignDate"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["formNumber"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["pieceNumber"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["department"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["paperNumber"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["recordNumber"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["motherName"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["classType"]).includes(search.husbandName);
+          tmm = tmm || String(all[i]["birthPlace"]).includes(search.husbandName);
+        }
       }
       if (tmm) x++;
       if (tmm && x >= start) tmp.push(all[i]);
@@ -197,7 +271,9 @@ export const Lists = () => {
     }
 
     setData(tmp);
-    setCur((pre) => pre - 1);
+    if(tmp.length)
+      setCur((pre) => pre - 1);
+    
   };
 
   if (!data || !user) return <div className={style.loader}></div>;
@@ -365,7 +441,7 @@ export const Lists = () => {
           </div>
         </div>
       </div>
-      {clk && <DeleteModal setClk={setClk} id = {id} />}
+      {clk && <DeleteModal setClk={setClk} id={id} />}
     </>
   );
 };
