@@ -161,7 +161,7 @@ export const EditForm = () => {
           ></input>
           <label> رقم السجل </label>
           <input
-            type="number"
+            type="text"
             onChange={(e) => {
               setData({ ...data, recordNumber: e.target.value });
             }}
@@ -170,7 +170,7 @@ export const EditForm = () => {
 
           <label> رقم الصحيفة</label>
           <input
-            type="number"
+            type="text"
             onChange={(e) => {
               setData({ ...data, paperNumber: e.target.value });
             }}
@@ -224,7 +224,7 @@ export const EditForm = () => {
           ></input>
           <label> رقم القطعة</label>
           <input
-            type="number"
+            type="text"
             onChange={(e) => {
               setData({ ...data, pieceNumber: e.target.value });
             }}
@@ -232,7 +232,7 @@ export const EditForm = () => {
           ></input>
           <label> المساحة </label>
           <input
-            type="number"
+            type="text"
             onChange={(e) => {
               setData({ ...data, area: e.target.value });
             }}

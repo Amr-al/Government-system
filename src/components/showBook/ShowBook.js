@@ -26,18 +26,16 @@ export const ShowBook = () => {
   );
   useEffect(() => {
     let token = Cookies.get("auth");
-    if (!token) window.location.replace("/");
-    if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("edit"))
-      window.location.replace("/");
-    setUser(jwtDecode(token).fullName);
+    // if (!token) window.location.replace("/");
+    // if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("edit"))
+    //   window.location.replace("/");
+    // setUser(jwtDecode(token).fullName);
     let get = async () => {
       let res = await fetch(
         `https://adventurous-erin-long-johns.cyclic.app/form/${id}`,
         {
           method: "GET",
-          headers: {
-            Authorization: `token ${token}`,
-          },
+          
         }
       );
 
@@ -136,7 +134,7 @@ export const ShowBook = () => {
           </div>
           <p style={{ textAlign: "right", marginRight: "20px" }}>
             {" "}
-            <b>ملاحظه :</b> الاستمارة خالية من الحك والشطب وفي حال ذلك تعترب
+            <b>ملاحظه :</b> الاستمارة خالية من الحك والشطب وفي حال ذلك تعتبر
             مزورة{" "}
           </p>
         </div>

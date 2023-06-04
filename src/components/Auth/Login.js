@@ -165,7 +165,7 @@ const Login = () => {
         </form>
       </div>
       <div
-        style={{ margin: "0px", paddingTop:'39rem' }}
+        style={{ margin: "0px" , paddingTop:'85vh' }}
       >
         <div style={{ textAlign: "center" }}>
           جميع الحقوق محفوظه لشركه الكوسج
