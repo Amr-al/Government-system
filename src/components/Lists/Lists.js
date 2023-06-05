@@ -5,6 +5,7 @@ import { Nav } from "../Nav/Nav";
 import jwtDecode from "jwt-decode";
 import { Print } from "../printForm/Print";
 import { DeleteModal } from "../deleteModal/DeleteModal";
+import axios from "axios";
 export const Lists = () => {
   const [user, setUser] = useState(null);
   const [data, setData] = useState(null);
@@ -17,99 +18,65 @@ export const Lists = () => {
   const [check, setCheck] = useState(false);
   const [clk, setClk] = useState(false);
   const [id, setId] = useState("");
+  const [fullName, setFullName] = useState(null);
+  const [husbandName, sethusbandName] = useState(null);
 
   useEffect(() => {
     let token = Cookies.get("auth");
     if (!token) window.location.replace("/");
     setUser(jwtDecode(token));
     const get = async () => {
-      let res = await fetch(
-        "https://adventurous-erin-long-johns.cyclic.app/form/?page=1&limit=30 ",
-        {
-          method: "GET",
+      axios
+        .get("https://adventurous-erin-long-johns.cyclic.app/form/ ", {
           headers: {
             Authorization: `token ${token}`,
           },
-        }
-      );
-      if (res.status == 200) {
-        res = await res.json();
-        setData(res.slice(0, 30));
-        setAll(res);
-        setLen(res.length);
-      } else {
-        // console.log(res);
-      }
+        })
+        .then((res) => {
+          setData(res.data.data);
+          setAll(res.data.data);
+          setLen(res.data.len);
+        });
+
+      // if (res.status == 200) {
+      //   res = await res.json();
+
+      // } else {
+      // }
     };
     get();
   }, []);
-  const handelDelete = async (id) => {
-    let token = Cookies.get("auth");
-    let res = await fetch(
-      `https://adventurous-erin-long-johns.cyclic.app/form/delete/${id}`,
-      {
-        method: "DELETE",
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      }
-    );
-    if (res.status == 200) {
-      window.location.reload();
-    } else {
-      // console.log(res);
-    }
-  };
+
+  // const handelDelete = async (id) => {
+  //   let token = Cookies.get("auth");
+  //   let res = await fetch(
+  //     `https://adventurous-erin-long-johns.cyclic.app/form/delete/${id}`,
+  //     {
+  //       method: "DELETE",
+  //       headers: {
+  //         Authorization: `token ${token}`,
+  //       },
+  //     }
+  //   );
+  //   if (res.status == 200) {
+  //     window.location.reload();
+  //   } else {
+  //   }
+  // };
   let token = Cookies.get("auth");
   const handelSubmit = async (e) => {
     e.preventDefault();
     setCur(1);
-    let tmp = [];
-    //  console.log(search);
-    for (let i = 0; i < all.length; ++i) {
-      let tmm = true;
-      if (
-        (search.fullName && search.fullName != "") ||
-        (search.husbandName && search.husbandName != "")
-      ) {
-        tmm =
-          (all[i]["fullName"] != "" &&
-            search.fullName != "" &&
-            String(all[i]["fullName"]).includes(search.fullName)) ||
-          (all[i]["husbandName"] != "" &&
-            search.husbandName != "" &&
-            String(all[i]["husbandName"]).includes(search.husbandName));
-      }
-      if (search.fullName && search.fullName != "") {
-        tmm = tmm ||String(all[i]["area"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["assignDate"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["formNumber"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["pieceNumber"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["department"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["paperNumber"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["recordNumber"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["motherName"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["classType"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["addressNubmer"]).includes(search.fullName);
-        tmm = tmm ||String(all[i]["birthPlace"]).includes(search.fullName);
-      }
-      if (search.husbandName && search.husbandName != ""){
-        tmm = tmm || String(all[i]["area"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["assignDate"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["formNumber"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["pieceNumber"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["department"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["paperNumber"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["recordNumber"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["motherName"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["classType"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["birthPlace"]).includes(search.husbandName);
-      }
-      if (tmm) tmp.push(all[i]);
-      if (tmp.length == 30) break;
-    }
-    console.log(tmp);
-    setData(tmp);
+    axios
+      .post(
+        "https://adventurous-erin-long-johns.cyclic.app/form/front/?page=1",
+        {
+           search,
+        }
+      )
+      .then((res) => {
+        setData(res.data);
+      });
     // let res = await fetch(`http://127.0.0.1:8000/form/filter/?page=${currentPage}`, {
     //   method: "POST",
     //   headers: {
@@ -123,10 +90,8 @@ export const Lists = () => {
     // });
     // if (res.status == 200) {
     //   res = await res.json();
-    //  // console.log(res);
     //   setData(res);
     // } else {
-    //   console.log(res);
     // }
   };
 
@@ -149,58 +114,19 @@ export const Lists = () => {
     // } else {
     //   console.log(res);
     // }
-
-    let tmp = [],
-      x = 0;
-    let start = currentPage * 30;
-    for (let i = 0; i < all.length; ++i) {
-      let tmm = true;
-      if (
-        (search.fullName && search.fullName != "") ||
-        (search.husbandName && search.husbandName != "")
-      ) {
-        tmm =
-          (all[i]["fullName"] != "" &&
-            search.fullName != "" &&
-            String(all[i]["fullName"]).includes(search.fullName)) ||
-          (all[i]["husbandName"] != "" &&
-            search.husbandName != "" &&
-            String(all[i]["husbandName"]).includes(search.husbandName));
-      }
-      if (search.fullName && search.fullName != "") {
-        tmm = tmm || String(all[i]["area"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["assignDate"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["formNumber"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["pieceNumber"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["department"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["paperNumber"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["recordNumber"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["motherName"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["classType"]).includes(search.fullName);
-        tmm = tmm || String(all[i]["birthPlace"]).includes(search.fullName);
-      }
-      if (search.husbandName && search.husbandName != "") {
-        tmm = tmm || String(all[i]["area"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["assignDate"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["formNumber"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["pieceNumber"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["department"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["paperNumber"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["recordNumber"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["motherName"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["classType"]).includes(search.husbandName);
-        tmm = tmm || String(all[i]["birthPlace"]).includes(search.husbandName);
-      }
-      if (tmm) x++;
-      if (tmm && x >= start) tmp.push(all[i]);
-      if (tmp.length == 30) break;
-    }
-    setData(tmp);
-    if (tmp.length) {
-      
-      setCur((prev) => prev + 1);
-      // setLen(start + tmp.length);
-    }
+    axios
+      .post(
+        `https://adventurous-erin-long-johns.cyclic.app/form/front/?page=${currentPage+1}`,
+        {
+           search,
+        }
+      )
+      .then((res) => {
+        if (res.data.length) {
+          setCur((pre) => pre + 1);
+          setData(res.data);
+        }
+      });
   };
   const handelPrev = async () => {
     if (currentPage == 1) return;
@@ -220,65 +146,28 @@ export const Lists = () => {
     //   setLen(res.length);
     //   setCur((prev) => prev - 1);
     // } else {
-    //   console.log(res);
     // }
 
-    let tmp = [],
-      x = 0;
-    let start = (currentPage - 2) * 30;
-
-    for (let i = 0; i < all.length; ++i) {
-      let tmm = true;
-      if (
-        (search.fullName && search.fullName != "") ||
-        (search.husbandName && search.husbandName != "")
-      ) {
-        tmm =
-          (all[i]["fullName"] != "" &&
-            search.fullName != "" &&
-            String(all[i]["fullName"]).includes(search.fullName)) ||
-          (all[i]["husbandName"] != "" &&
-            search.husbandName != "" &&
-            String(all[i]["husbandName"]).includes(search.husbandName));
-        if (search.fullName && search.fullName != "") {
-          tmm = tmm || String(all[i]["area"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["assignDate"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["formNumber"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["pieceNumber"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["department"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["paperNumber"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["recordNumber"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["motherName"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["classType"]).includes(search.fullName);
-          tmm = tmm || String(all[i]["birthPlace"]).includes(search.fullName);
+    axios
+      .post(
+        `https://adventurous-erin-long-johns.cyclic.app/form/front/?page=${
+          currentPage - 1
+        }`,
+        {
+           search,
         }
-        if (search.husbandName && search.husbandName != "") {
-          tmm = tmm || String(all[i]["area"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["assignDate"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["formNumber"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["pieceNumber"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["department"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["paperNumber"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["recordNumber"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["motherName"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["classType"]).includes(search.husbandName);
-          tmm = tmm || String(all[i]["birthPlace"]).includes(search.husbandName);
+      )
+      .then((res) => {
+        if (res.data.length) {
+          setCur((pre) => pre - 1);
+          setData(res.data);
         }
-      }
-      if (tmm) x++;
-      if (tmm && x >= start) tmp.push(all[i]);
-      if (tmp.length == 30) break;
-    }
-
-    setData(tmp);
-    if(tmp.length)
-      setCur((pre) => pre - 1);
-    
+      });
   };
 
   if (!data || !user) return <div className={style.loader}></div>;
   return check ? (
-    <Print husbandName={search.husbandName} fullName={search.fullName}></Print>
+    <Print husbandName={husbandName} fullName={fullName}></Print>
   ) : (
     <>
       <Nav name="الارشيف" number={len} />
@@ -290,15 +179,23 @@ export const Lists = () => {
           <input
             type={"text"}
             placeholder="اسم الزوج"
+            name="husbandName"
             onChange={(e) => {
-              setSearch({ ...search, husbandName: e.target.value });
+              setSearch(e.target.value);
+              sethusbandName(e.target.value);
+               handelSubmit(e)
             }}
-          ></input>
+          />
           <input
             type={"text"}
             placeholder="اسم مقدم الطلب"
+            name="fullName"
             onChange={(e) => {
-              setSearch({ ...search, fullName: e.target.value });
+
+              setSearch(e.target.value);
+              setFullName(e.target.value);
+               handelSubmit(e)
+
             }}
           ></input>
         </form>
@@ -413,7 +310,7 @@ export const Lists = () => {
             </>
           );
         })}
-        {data.length == 0 && (search.husbandName || search.fullName) && (
+        {data.length == 0 && (husbandName || fullName) && (
           <div style={{ display: "flex", justifyContent: "center" }}>
             <button
               className={style.tba3a}

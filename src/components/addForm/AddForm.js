@@ -29,7 +29,7 @@ export const AddForm = () => {
         let tmp = [],
           tmp2 = [];
         res.map((item) => {
-          console.log(item);
+          // console.log(item);
           if (item.type == "address") tmp.push(item);
           else tmp2.push(item);
         });
@@ -37,29 +37,31 @@ export const AddForm = () => {
         setAdress(tmp);
         setClass(tmp2);
       }
-      res = await fetch("https://adventurous-erin-long-johns.cyclic.app/form/ ", {
-        method: "GET",
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      });
-      if (res.status == 200) {
-        res = await res.json();
-        console.log(res.length);
-        if (res.length !== 0) setNum( parseInt( res[0].formNumber) );
-        else {
-          setNum(0);
-        }
-      } else {
-        console.log(res);
-      }
+      // res = await fetch("https://adventurous-erin-long-johns.cyclic.app/form/ ", {
+      //   method: "GET",
+      //   headers: {
+      //     Authorization: `token ${token}`,
+      //   },
+      // });
+      // if (res.status == 200) {
+      //   res = await res.json();
+      //   console.log(res.length);
+      //   if (res.length !== 0) setNum( parseInt( res[0].formNumber) );
+      //   else {
+      //     setNum(0);
+      //   }
+      // } else {
+      //   console.log(res);
+      // }
     };
     get();
   }, []);
   const handelSumbit = async (e) => {
     e.preventDefault();
-  //  console.log(data);
+    console.log(data);
     setClk(true)
+  
+    if( Object.keys(data).length == 0) window.location.replace('/forms')
     const formdata = new FormData();
     for (const [key, value] of Object.entries(data)) {
       console.log(key, value);
@@ -74,8 +76,8 @@ export const AddForm = () => {
     });
     console.log(res.status);
     if (res.status == 200) {
-      console.log(res);
-      window.location.replace("/forms");
+      // console.log(res);
+       window.location.replace("/forms");
     } else {
       console.log(res);
       window.location.reload();
