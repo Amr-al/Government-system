@@ -14,8 +14,8 @@ export const Logs = () => {
   useEffect(() => {
     let token = Cookies.get("auth");
     if (!token) window.location.replace("/");
-    if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("setting"))
-      window.location.replace("/");
+    // if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("setting"))
+    //   window.location.replace("/");
     const get = async () => {
       let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/logs", {
         method: "POST",

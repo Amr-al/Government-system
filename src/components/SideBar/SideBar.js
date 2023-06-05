@@ -51,6 +51,7 @@ export const SideBar = () => {
           ></i>
         </h1>
       </a>
+      
       {(user.admin || user.role.includes("add")) && (
         <>
           <a
@@ -75,6 +76,24 @@ export const SideBar = () => {
           </a>
         </>
       )}
+      <a
+        className={style.section}
+        onClick={() => {
+          window.location.replace("/logs");
+        }}
+      >
+        <h1 style={{ color: "white", fontSize: "20px" }}>
+          <b style={{ marginRight: "20px", display: hide }}>Logs System</b>
+          <i
+            className="fa fa-history"
+            style={{
+              color: "white",
+              fontSize: "20px",
+              marginRight: "20px",
+            }}
+          ></i>
+        </h1>
+      </a>
       {(user.admin || user.role.includes("setting")) && (
         <>
           <a className={style.setting} onClick={handelclick}>
@@ -157,27 +176,6 @@ export const SideBar = () => {
             ></i>
           </h1>
         </a>*/}
-
-            <a
-              className={style.section}
-              onClick={() => {
-                window.location.replace("/logs");
-              }}
-            >
-              <h1 style={{ color: "white", fontSize: "20px" }}>
-                <b style={{ marginRight: "20px", display: hide }}>
-                  Logs System
-                </b>
-                <i
-                  className="fa fa-history"
-                  style={{
-                    color: "white",
-                    fontSize: "20px",
-                    marginRight: "20px",
-                  }}
-                ></i>
-              </h1>
-            </a>
           </div>
         </>
       )}
