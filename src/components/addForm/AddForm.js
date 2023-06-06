@@ -70,7 +70,7 @@ export const AddForm = (props) => {
       console.log(key, value);
       formdata.append(key, value);
     }
-    formdata.append("formNumber", props.num + 1);
+    formdata.append("formNumber", num + 1);
     let token = Cookies.get("auth");
     let res = await axios.post("https://adventurous-erin-long-johns.cyclic.app/form/create",formdata, {
       headers: {
