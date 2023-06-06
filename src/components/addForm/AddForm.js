@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./AddForm.module.css";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { Nav } from "../Nav/Nav";
 import axios from "axios";
-export const AddForm = () => {
+import { Context } from "../../App";
+export const AddForm = (props) => {
+  console.log(props);
   const [data, setData] = useState({});
   const [adress, setAdress] = useState([]);
   const [classes, setClass] = useState([]);
   const [nw, setNew] = useState(true);
   const [nw2, setNew2] = useState(true);
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState(localStorage.getItem('num'));
   const [clk ,setClk] = useState(false)
+
   useEffect(() => {
     let token = Cookies.get("auth");
     if (!token) window.location.replace("/");
@@ -67,19 +70,19 @@ export const AddForm = () => {
       console.log(key, value);
       formdata.append(key, value);
     }
-    formdata.append("formNumber", num + 1);
+    formdata.append("formNumber", props.num + 1);
     let token = Cookies.get("auth");
     let res = await axios.post("https://adventurous-erin-long-johns.cyclic.app/form/create",formdata, {
       headers: {
         Authorization: `token ${token}`,
       },
     });
-    console.log(res.status);
+    // console.log(res.status);
     if (res.status == 200) {
       // console.log(res);
        window.location.replace("/forms");
     } else {
-      console.log(res);
+      // console.log(res);
       window.location.reload();
     }
   };

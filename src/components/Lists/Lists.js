@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import style from "./Lists.module.css";
 import Cookies from "js-cookie";
 import { Nav } from "../Nav/Nav";
@@ -6,20 +6,21 @@ import jwtDecode from "jwt-decode";
 import { Print } from "../printForm/Print";
 import { DeleteModal } from "../deleteModal/DeleteModal";
 import axios from "axios";
-export const Lists = () => {
+export const Lists = (props) => {
   const [user, setUser] = useState(null);
   const [data, setData] = useState(null);
   const [all, setAll] = useState(null);
   const [searchType, setType] = useState("");
   const [searchValue, setValue] = useState("");
   const [search, setSearch] = useState({});
-  const [len, setLen] = useState(0);
+   const [num, setNum] = useState(0);
   const [currentPage, setCur] = useState(1);
   const [check, setCheck] = useState(false);
   const [clk, setClk] = useState(false);
   const [id, setId] = useState("");
   const [fullName, setFullName] = useState(null);
   const [husbandName, sethusbandName] = useState(null);
+  console.log(num);
 
   useEffect(() => {
     let token = Cookies.get("auth");
@@ -27,7 +28,7 @@ export const Lists = () => {
     setUser(jwtDecode(token));
     const get = async () => {
       axios
-        .get("https://adventurous-erin-long-johns.cyclic.app/form/ ", {
+        .get("https://adventurous-erin-long-johns.cyclic.app/form/?page=1 ", {
           headers: {
             Authorization: `token ${token}`,
           },
@@ -35,7 +36,8 @@ export const Lists = () => {
         .then((res) => {
           setData(res.data.data);
           setAll(res.data.data);
-          setLen(res.data.len);
+          setNum(res.data.len);
+          localStorage.setItem('num',res.data.len)
         });
 
       // if (res.status == 200) {
@@ -170,7 +172,7 @@ export const Lists = () => {
     <Print husbandName={husbandName} fullName={fullName}></Print>
   ) : (
     <>
-      <Nav name="الارشيف" number={len} />
+      <Nav name="الارشيف" number={num} />
       <div className={style.Lcontainer}>
         <form onSubmit={handelSubmit}>
           <button type="submit">
@@ -306,7 +308,7 @@ export const Lists = () => {
                 </div>
                 <div className={style.girdItem2}>{index + 1}</div>
               </div>
-              {index != len - 1 ? <hr style={{ width: "100%" }}></hr> : <></>}
+              {index != num - 1 ? <hr style={{ width: "100%" }}></hr> : <></>}
             </>
           );
         })}

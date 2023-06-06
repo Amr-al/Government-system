@@ -20,24 +20,25 @@ import {
   Route,
   useBeforeUnload,
 } from "react-router-dom";
+import { createContext, useState } from "react";
+export const Context = createContext(null);
+
 function App() {
   return (
     <>
-    <Routes>
-      <Route exact path="/" element={<Login />} />
-      <Route exact path="/forms" element={<Lists />} />
-      <Route exact path="/profile/:id" element={<Profile/>} />
-      <Route exact path="/form/add" element={<AddForm/>} />
-      <Route exact path="/users" element={<Users/>} />
-      <Route exact path="/classes" element={<Class/>} />
-      <Route exact path="/logo" element={<Logo/>} />
-      <Route exact path="/form/edit/:id" element={<EditForm/>} />
-      <Route exact path="/logs" element={<Logs/>} />
-      <Route exact path="/form/print/:id" element={<Print/>} />
-      <Route exact path="/form/show/:id" element={<ShowBook/>} />
-
-    </Routes>
-
+      <Routes>
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/forms" element={<Lists />} />
+        <Route exact path="/profile/:id" element={<Profile />} />
+        <Route exact path="/form/add" element={<AddForm />} />
+        <Route exact path="/users" element={<Users />} />
+        <Route exact path="/classes" element={<Class />} />
+        <Route exact path="/logo" element={<Logo />} />
+        <Route exact path="/form/edit/:id" element={<EditForm />} />
+        <Route exact path="/logs" element={<Logs />} />
+        <Route exact path="/form/print/:id" element={<Print />} />
+        <Route exact path="/form/show/:id" element={<ShowBook />} />
+      </Routes>
     </>
   );
 }
