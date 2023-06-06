@@ -248,7 +248,7 @@ export const AddForm = (props) => {
             }}
           ></input>
           <label> رقم الاستماره </label>
-          <input type="text" placeholder={num + 1} disabled></input>
+          <input type="text" placeholder={num * 1 + 1} disabled></input>
           
           <button type="submit" disabled={clk}>{clk? "تحميل..." :"اضافه +"} </button>
         </form>
