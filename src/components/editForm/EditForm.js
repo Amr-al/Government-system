@@ -20,7 +20,7 @@ export const EditForm = () => {
     if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("edit"))
       window.location.replace("/");
     let get = async () => {
-      let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/${id}`, {
+      let res = await fetch(`https://smv.onrender.com/form/${id}`, {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -33,7 +33,7 @@ export const EditForm = () => {
        // console.log(res);
       }
 
-      res = await fetch("https://adventurous-erin-long-johns.cyclic.app/class/", {
+      res = await fetch("https://smv.onrender.com/class/", {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -64,7 +64,7 @@ export const EditForm = () => {
       formdata.append(key, value);
     }
     let token = Cookies.get("auth");
-    let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/form/edit/${id}`, {
+    let res = await fetch(`https://smv.onrender.com/form/edit/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

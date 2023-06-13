@@ -14,7 +14,7 @@ export const Logo = () => {
       window.location.replace("/");
     const get = async () => {
       let res = await fetch(
-        "https://adventurous-erin-long-johns.cyclic.app/auth/logo",
+        "https://smv.onrender.com/auth/logo",
         {
           method: "GET",
           headers: {
@@ -47,7 +47,7 @@ export const Logo = () => {
     formdata.append("file", file);
     let token = Cookies.get("auth");
     let res = await fetch(
-      "https://adventurous-erin-long-johns.cyclic.app/auth/logo",
+      "https://smv.onrender.com/auth/logo",
       {
         method: "POST",
         headers: {

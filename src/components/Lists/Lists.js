@@ -28,7 +28,7 @@ export const Lists = (props) => {
     setUser(jwtDecode(token));
     const get = async () => {
       axios
-        .get("https://adventurous-erin-long-johns.cyclic.app/form/?page=1 ", {
+        .get("https://smv.onrender.com/form/?page=1 ", {
           headers: {
             Authorization: `token ${token}`,
           },
@@ -71,7 +71,7 @@ export const Lists = (props) => {
     setCur(1);
     axios
       .post(
-        "https://adventurous-erin-long-johns.cyclic.app/form/front/?page=1",
+        "https://smv.onrender.com/form/front/?page=1",
         {
            search,
         }
@@ -118,7 +118,7 @@ export const Lists = (props) => {
     // }
     axios
       .post(
-        `https://adventurous-erin-long-johns.cyclic.app/form/front/?page=${currentPage+1}`,
+        `https://smv.onrender.com/form/front/?page=${currentPage+1}`,
         {
            search,
         }
@@ -152,7 +152,7 @@ export const Lists = (props) => {
 
     axios
       .post(
-        `https://adventurous-erin-long-johns.cyclic.app/form/front/?page=${
+        `https://smv.onrender.com/form/front/?page=${
           currentPage - 1
         }`,
         {

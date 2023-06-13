@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault();
     setErro(null);
     let res = await fetch(
-      "https://adventurous-erin-long-johns.cyclic.app/auth/signin",
+      "https://smv.onrender.com/auth/signin",
       {
         method: "POST",
         headers: {

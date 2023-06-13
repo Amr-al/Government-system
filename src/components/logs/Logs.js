@@ -17,7 +17,7 @@ export const Logs = () => {
     // if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("setting"))
     //   window.location.replace("/");
     const get = async () => {
-      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/logs", {
+      let res = await fetch("https://smv.onrender.com/logs", {
         method: "POST",
         headers: {
           Authorization: `token ${token}`,
@@ -41,7 +41,7 @@ export const Logs = () => {
         });
         setData(tmp);
       }
-      res = await fetch("https://adventurous-erin-long-johns.cyclic.app/auth/all", {
+      res = await fetch("https://smv.onrender.com/auth/all", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

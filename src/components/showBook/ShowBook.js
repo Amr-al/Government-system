@@ -32,7 +32,7 @@ export const ShowBook = () => {
     // setUser(jwtDecode(token).fullName);
     let get = async () => {
       let res = await fetch(
-        `https://adventurous-erin-long-johns.cyclic.app/form/${id}`,
+        `https://smv.onrender.com/form/${id}`,
         {
           method: "GET",
           

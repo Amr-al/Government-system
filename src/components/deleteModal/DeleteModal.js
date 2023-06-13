@@ -5,7 +5,7 @@ export const DeleteModal = (props) => {
   const handelSubmit = async (e) => {
     let token = Cookies.get("auth");
     let res = await fetch(
-      `https://adventurous-erin-long-johns.cyclic.app/form/delete/${props.id}`,
+      `https://smv.onrender.com/form/delete/${props.id}`,
       {
         method: "DELETE",
         headers: {

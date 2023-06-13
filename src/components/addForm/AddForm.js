@@ -21,7 +21,7 @@ export const AddForm = (props) => {
     if (!jwtDecode(token).admin && !jwtDecode(token).role.includes("add"))
       window.location.replace("/");
     let get = async () => {
-      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/class/", {
+      let res = await fetch("https://smv.onrender.com/class/", {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -72,7 +72,7 @@ export const AddForm = (props) => {
     }
     formdata.append("formNumber", num + 1);
     let token = Cookies.get("auth");
-    let res = await axios.post("https://adventurous-erin-long-johns.cyclic.app/form/create",formdata, {
+    let res = await axios.post("https://smv.onrender.com/form/create",formdata, {
       headers: {
         Authorization: `token ${token}`,
       },

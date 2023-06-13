@@ -11,7 +11,7 @@ export const Users = () => {
     let token = Cookies.get("auth");
     if (!token) window.location.replace("/");
     const getAll = async () => {
-      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/auth/all ", {
+      let res = await fetch("https://smv.onrender.com/auth/all ", {
         method: "GET",
       });
       if (res.status == 200) {

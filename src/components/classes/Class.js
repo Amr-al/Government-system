@@ -14,7 +14,7 @@ const Class = () => {
     //console.log(jwtDecode(token).admin);
     if (!jwtDecode(token).admin && !jwtDecode(token).role.includes('setting')) window.location.replace("/");
     const get = async () => {
-      let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/class/", {
+      let res = await fetch("https://smv.onrender.com/class/", {
         method: "GET",
         headers: {
           Authorization: `token ${token}`,
@@ -40,7 +40,7 @@ const Class = () => {
   const handelDelete = async (id) => {
     let token = Cookies.get("auth");
     // console.log(id);
-    let res = await fetch(`https://adventurous-erin-long-johns.cyclic.app/class/${id}`, {
+    let res = await fetch(`https://smv.onrender.com/class/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const Class = () => {
    // console.log(Name);
     let token = Cookies.get("auth");
   //  console.log(token);
-    let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/class/", {
+    let res = await fetch("https://smv.onrender.com/class/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ const Class = () => {
 // console.log(Name);
     let token = Cookies.get("auth");
    // console.log(token);
-    let res = await fetch("https://adventurous-erin-long-johns.cyclic.app/class/", {
+    let res = await fetch("https://smv.onrender.com/class/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

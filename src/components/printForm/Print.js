@@ -35,7 +35,7 @@ export const Print = (props) => {
     } else {
       let get = async () => {
         let res = await fetch(
-          `https://adventurous-erin-long-johns.cyclic.app/form/${id}`,
+          `https://smv.onrender.com/form/${id}`,
           {
             method: "GET",
             headers: {
@@ -57,7 +57,7 @@ export const Print = (props) => {
     e.preventDefault();
     let token = Cookies.get("auth");
     let res = await axios.post(
-      "https://adventurous-erin-long-johns.cyclic.app/form/create",
+      "https://smv.onrender.com/form/create",
       {
         fullName: props.fullName,
         husbandName: props.husbandName,
