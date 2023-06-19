@@ -31,14 +31,13 @@ export const ShowBook = () => {
     //   window.location.replace("/");
     // setUser(jwtDecode(token).fullName);
     let get = async () => {
-      let res = await fetch(
-        `https://smv.onrender.com/form/${id}`,
-        {
-          method: "GET",
-          
-        }
-      );
-
+      let res = await fetch(`https://smv.onrender.com/form/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `token ${token}`,
+        },
+      });
+      console.log(res.status)
       if (res.status == 200) {
         res = await res.json();
         setMyData(res);

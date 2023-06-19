@@ -72,11 +72,11 @@ export const EditForm = () => {
       },
       body: JSON.stringify(data),
     });
-  //  console.log(res.status);
+    console.log(res.status);
     if (res.status == 200) {
       res = await res.json();
    //   console.log(res);
-      window.location.replace('/forms');
+    //  window.location.replace('/forms');
     } else {
    //   console.log(res);
       window.location.replace("/");

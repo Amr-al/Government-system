@@ -174,7 +174,7 @@ export const Print = (props) => {
             <div className={style.def}>
               <div>
                 {" "}
-                {data.department ? `الشريحه / ${data.department}` : `/ الشريحه`}
+                {data.classType ? `الشريحه / ${data.classType}` : `/ الشريحه`}
               </div>
               <div>
                 {" "}
@@ -263,7 +263,7 @@ export const Print = (props) => {
               : `: رقم الصحيفة`}{" "}
           </div>
           <div>
-            {data.department ? ` الشريحة : ${data.department}` : `: الشريحة`}{" "}
+            {data.classType ? ` الشريحة : ${data.classType}` : `: الشريحة`}{" "}
           </div>
           <div>
             {" "}
