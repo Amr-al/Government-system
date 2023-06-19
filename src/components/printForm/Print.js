@@ -44,9 +44,11 @@ export const Print = (props) => {
             },
           }
         );
+        console.log(res);
 
         if (res.status == 200) {
           res = await res.json();
+          // console.log(res);
           setMyData(res);
         }
       };

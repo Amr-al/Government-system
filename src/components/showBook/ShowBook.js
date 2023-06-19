@@ -33,14 +33,14 @@ export const ShowBook = () => {
     let get = async () => {
       let res = await fetch(`https://smv.onrender.com/form/${id}`, {
         method: "GET",
-        headers: {
-          Authorization: `token ${token}`,
-        },
+        // headers: {
+        //   Authorization: `token ${token}`,
+        // },
       });
       console.log(res.status)
       if (res.status == 200) {
         res = await res.json();
-        setMyData(res[0]);
+        setMyData(res);
       }
     };
     get();
@@ -96,7 +96,7 @@ export const ShowBook = () => {
               <div>رقم القطعة / {data.pieceNumber}</div>
             </div>
             <div className={style.def}>
-              <div>الشريحة / {data.department}</div>
+              <div>الشريحة / {data.classType}</div>
               <div>
                 {" "}
                 تاريخ التخصيص /{" "}
