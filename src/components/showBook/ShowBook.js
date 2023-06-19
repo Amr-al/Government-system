@@ -40,7 +40,7 @@ export const ShowBook = () => {
       console.log(res.status)
       if (res.status == 200) {
         res = await res.json();
-        setMyData(res);
+        setMyData(res[0]);
       }
     };
     get();
