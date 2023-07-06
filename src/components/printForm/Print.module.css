@@ -4,7 +4,7 @@
   flex-direction: row;
 }
 .tmp {
-  height: 40px;
+  height: 30px;
   background-color: #ffffff;
 }
 .toPrint {
@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  margin-top: 10px;
+  margin-top: 5px;
   font-weight: 900;
   font-size: 20px;
   font-family: "Cairo";
@@ -71,7 +71,7 @@
   font-size: 18px;
   font-weight: 500;
   text-align: right;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
 }
 .tabl div {
   border-bottom: 0.5px solid black;
@@ -93,12 +93,12 @@
   text-align: right;
   width: 90%;
   margin: auto;
-  margin-bottom: 60px;
+  margin-bottom: 50px;
 }
 .qr {
   display: flex;
   justify-content: center;
-  margin-bottom: 45px;
+  margin-bottom: 35px;
 }
 .footer {
   text-align: center;

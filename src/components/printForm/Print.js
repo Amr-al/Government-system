@@ -20,7 +20,7 @@ export const Print = (props) => {
   );
   const handelPrint = useReactToPrint({
     content: () => componentRef.current,
-    documentTitle: "test",
+    documentTitle: "SMV",
   });
   const [id, setId] = useState(useParams().id);
   ///  let id = "6473ebcd8b5f100889736829";
@@ -73,7 +73,7 @@ export const Print = (props) => {
     );
     if (res.status == 200) {
       //   res = await res.json()
-      console.log(data);
+      // console.log(data);
       setId(res.data);
       setMyData(res.data);
 
@@ -129,12 +129,12 @@ export const Print = (props) => {
             style={{
               width: "90%",
               border: "1.5px solid black",
-              marginBottom: "30px",
+              marginBottom: "10px",
             }}
           ></hr>
           <div className={style.head}>
             <div style={{ marginBottom: "20px" }}>م/ بيان استفادة</div>
-            <div style={{ marginBottom: "50px" }}>
+            <div style={{ marginBottom: "40px" }}>
               :لدى الفحص و التدقيق في برنامج ادخال المستفيدين تبين مايلي
             </div>
           </div>
@@ -188,6 +188,10 @@ export const Print = (props) => {
             <div style={{ padding: "10px", borderLeft: ".5px solid black" }}>
               {" "}
               موقف مقدم الطلب / {data.beneficiary ? "مستفيد" : "غير مستفيد"}
+            </div>
+            <div style={{ padding: "10px", borderLeft: ".5px solid black",fontSize:'12px' }}>
+              {" "}
+              {data.note != ""?`ملاحظه / ${data.note}`: `/ ملاحظه`}
             </div>
           </div>
           <p className={style.notice} style={{ marginBottom: mb1 }}>

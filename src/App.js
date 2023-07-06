@@ -20,13 +20,20 @@ import {
   Route,
   useBeforeUnload,
 } from "react-router-dom";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { CSVLink, CSVDownload } from "react-csv";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { Database } from "./components/test/Database";
+
 export const Context = createContext(null);
 
 function App() {
+  // رقم معرف	الاسم الكامل	مسقط الراس	المواليد	الشريحه	اسم الزوج	رقم السجل	رقم الصحيفه	دائرة الاحوال	رقم القطعه	المقاطعه	المساحه	تاريخ التخصيص
+  
   return (
     <>
-      <Routes>
+       <Routes>
         <Route exact path="/" element={<Login />} />
         <Route exact path="/forms" element={<Lists />} />
         <Route exact path="/profile/:id" element={<Profile />} />
@@ -38,7 +45,10 @@ function App() {
         <Route exact path="/logs" element={<Logs />} />
         <Route exact path="/form/print/:id" element={<Print />} />
         <Route exact path="/form/show/:id" element={<ShowBook />} />
-      </Routes>
+        <Route exact path="/smv-database" element={<Database/>}/>
+      </Routes> 
+      
+      
     </>
   );
 }

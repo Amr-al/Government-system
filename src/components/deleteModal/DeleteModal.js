@@ -16,7 +16,7 @@ export const DeleteModal = (props) => {
     if (res.status == 200) {
       window.location.reload();
     } else {
-      // console.log(res);
+       console.log(res);
     }
   };
   return (

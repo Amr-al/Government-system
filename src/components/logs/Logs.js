@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "./Logs.module.css";
+import { useReactToPrint } from "react-to-print";
 import Cookies from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { Nav } from "../Nav/Nav";
@@ -10,6 +11,12 @@ export const Logs = () => {
   const [selected, setSelected] = useState({});
   const [date, setDate] = useState();
   const [currentPage, setCur] = useState(1);
+  const componentRef = useRef();
+
+  const handelPrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: "SMV",
+  });
 
   useEffect(() => {
     let token = Cookies.get("auth");
@@ -77,7 +84,7 @@ export const Logs = () => {
         if (date1 < date2) ok = 0;
       }
       if (selected.user) {
-        let tmm = String(all[i]["user"]).includes( String(selected.user));
+        let tmm = String(all[i]["user"]).includes(String(selected.user));
         if (!tmm) ok = 0;
       }
       if (selected.type) {
@@ -184,6 +191,7 @@ export const Logs = () => {
             <button type="submit">
               <i className="fa fa-arrow-circle-left"></i>
             </button>
+            <button type="submit" onClick={handelPrint}>طباعه</button>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <label style={{ marginLeft: "10px", fontWeight: "bold" }}>
                 الي
@@ -256,45 +264,49 @@ export const Logs = () => {
               })}
             </select>
           </form>
-
-          <div className={style.girdTable}>
-            <div className={style.girdItem}>IP </div>
-            <div className={style.girdItem}>المنصة</div>
-            <div className={style.girdItem}>التاريخ</div>
-            <div className={style.girdItem}>التفاصيل</div>
-            <div className={style.girdItem}>الموظف</div>
-            <div className={style.girdItem}>النوع </div>
-          </div>
-          {data.map((item) => {
-            let color = "";
-            if (item.type.includes("دخول")) color = "#8ef3e7";
-            if (item.type.includes("حذف")) color = "#f39a8e";
-            if (item.type.includes("تعديل")) color = "#ffc107";
-            if (item.type.includes("اضافه")) color = "#8ebef3";
-            if (item.type.includes("موظف")) color = "#cb8ef3";
-            return (
-              <div className={style.girdTable2}>
-                <div className={style.girdItem2}>{item.ip}</div>
-                <div className={style.girdItem2}>{item.system}</div>
-                <div className={style.girdItem2}>
-                  {item.createdAt.slice(0, 10)}
-                </div>
-                <div className={style.girdItem2}>{item.details}</div>
-                <div className={style.girdItem2}>{item.user}</div>
-                <div className={style.girdItem2}>
-                  <div
-                    className={style.type}
-                    style={{ backgroundColor: color }}
-                  >
-                    {" "}
-                    {item.type}
+          <div ref={componentRef}>
+            <div className={style.girdTable}>
+              <div className={style.girdItem}>IP </div>
+              <div className={style.girdItem}>المنصة</div>
+              <div className={style.girdItem}>التاريخ</div>
+              <div className={style.girdItem}>التفاصيل</div>
+              <div className={style.girdItem}>الموظف</div>
+              <div className={style.girdItem}>النوع </div>
+            </div>
+            {data.map((item) => {
+              let color = "";
+              if (item.type.includes("دخول")) color = "#8ef3e7";
+              if (item.type.includes("حذف")) color = "#f39a8e";
+              if (item.type.includes("تعديل")) color = "#ffc107";
+              if (item.type.includes("اضافه")) color = "#8ebef3";
+              if (item.type.includes("موظف")) color = "#cb8ef3";
+              return (
+                <div className={style.girdTable2}>
+                  <div className={style.girdItem2}>{item.ip}</div>
+                  <div className={style.girdItem2}>{item.system}</div>
+                  <div className={style.girdItem2}>
+                    {item.createdAt.slice(0, 10)}
+                  </div>
+                  <div className={style.girdItem2}>{item.details}</div>
+                  <div className={style.girdItem2}>{item.user}</div>
+                  <div className={style.girdItem2}>
+                    <div
+                      className={style.type}
+                      style={{ backgroundColor: color }}
+                    >
+                      {" "}
+                      {item.type}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-        <div className={style.pagination} style={{display:'flex',justifyContent:'center'}}>
+        <div
+          className={style.pagination}
+          style={{ display: "flex", justifyContent: "center" }}
+        >
           <button onClick={handelPrev}>&laquo;</button>
           <button>{currentPage}</button>
 

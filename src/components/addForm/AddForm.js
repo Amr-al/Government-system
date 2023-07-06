@@ -6,14 +6,14 @@ import { Nav } from "../Nav/Nav";
 import axios from "axios";
 import { Context } from "../../App";
 export const AddForm = (props) => {
-  console.log(props);
+  // console.log(props);
   const [data, setData] = useState({});
   const [adress, setAdress] = useState([]);
   const [classes, setClass] = useState([]);
   const [nw, setNew] = useState(true);
   const [nw2, setNew2] = useState(true);
-  const [num, setNum] = useState(localStorage.getItem('num'));
-  const [clk ,setClk] = useState(false)
+  const [num, setNum] = useState(localStorage.getItem("num"));
+  const [clk, setClk] = useState(false);
 
   useEffect(() => {
     let token = Cookies.get("auth");
@@ -62,9 +62,9 @@ export const AddForm = (props) => {
   const handelSumbit = async (e) => {
     e.preventDefault();
     console.log(data);
-    setClk(true)
-  
-    if( Object.keys(data).length == 0) window.location.replace('/forms')
+    setClk(true);
+
+    if (Object.keys(data).length == 0) window.location.replace("/forms");
     const formdata = new FormData();
     for (const [key, value] of Object.entries(data)) {
       console.log(key, value);
@@ -72,15 +72,19 @@ export const AddForm = (props) => {
     }
     formdata.append("formNumber", num + 1);
     let token = Cookies.get("auth");
-    let res = await axios.post("https://smv.onrender.com/form/create",formdata, {
-      headers: {
-        Authorization: `token ${token}`,
-      },
-    });
+    let res = await axios.post(
+      "https://smv.onrender.com/form/create",
+      formdata,
+      {
+        headers: {
+          Authorization: `token ${token}`,
+        },
+      }
+    );
     // console.log(res.status);
     if (res.status == 200) {
       // console.log(res);
-       window.location.replace("/forms");
+      window.location.replace("/forms");
     } else {
       // console.log(res);
       window.location.reload();
@@ -246,11 +250,20 @@ export const AddForm = (props) => {
             onChange={(e) => {
               setData({ ...data, file: e.target.files[0] });
             }}
+          />
+          <label> الملاحظه </label>
+          <input
+            type="text"
+            onChange={(e) => {
+              setData({ ...data, note: e.target.value });
+            }}
           ></input>
           <label> رقم الاستماره </label>
           <input type="text" placeholder={num * 1 + 1} disabled></input>
-          
-          <button type="submit" disabled={clk}>{clk? "تحميل..." :"اضافه +"} </button>
+
+          <button type="submit" disabled={clk}>
+            {clk ? "تحميل..." : "اضافه +"}{" "}
+          </button>
         </form>
       </div>
     </>
