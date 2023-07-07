@@ -107,6 +107,10 @@ export const ShowBook = () => {
               {" "}
               موقف مقدم الطلب / {data.beneficiary ? "مستفيد" : "غير مستفيد"}
             </div>
+            <div style={{ padding: "10px", borderLeft: ".5px solid black",fontSize:'14px' }}>
+              {" "}
+              {data.note != ""?`ملاحظه / ${data.note}`: `/ ملاحظه`}
+            </div>
           </div>
           <p className={style.notice} style={{ marginBottom: mb1 }}>
             {" "}

@@ -51,7 +51,7 @@ export const SideBar = () => {
           ></i>
         </h1>
       </a>
-      
+
       {(user.admin || user.role.includes("add")) && (
         <>
           <a
@@ -167,15 +167,23 @@ export const SideBar = () => {
               </h1>
             </a>
 
-            {/*<a className={style.section}>
-          <h1 style={{ color: "white", fontSize: "20px" }}>
-            <b style={{ marginRight: "20px" }}>النسخه الاحتياطيه</b>
-            <i
-              className="fas fa-database"
-              style={{ color: "white", fontSize: "20px", marginRight: "20px" }}
-            ></i>
-          </h1>
-        </a>*/}
+            <a
+              className={style.section}
+              onClick={() => {
+                window.location.replace("/smv-database");
+              }}
+            >
+              <h1 style={{ color: "white", fontSize: "20px" }}>
+                <i
+                  className="fa fa-database"
+                  style={{
+                    color: "white",
+                    fontSize: "20px",
+                    marginRight: "20px",
+                  }}
+                ></i>
+              </h1>
+            </a>
           </div>
         </>
       )}
