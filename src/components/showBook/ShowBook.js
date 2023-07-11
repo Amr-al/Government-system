@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 
 export const ShowBook = () => {
   const componentRef = useRef();
+  const [rf, setRef] = useState(false);
   const handelPrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: "test",
@@ -37,9 +38,12 @@ export const ShowBook = () => {
         //   Authorization: `token ${token}`,
         // },
       });
-      console.log(res.status)
+      console.log(res.status);
       if (res.status == 200) {
         res = await res.json();
+        const date1 = new Date(res.createdAt.slice(0, 10));
+        const date2 = new Date("2023-07-11");
+        if (date1 > date2) setRef(true);
         setMyData(res);
       }
     };
@@ -103,13 +107,28 @@ export const ShowBook = () => {
                 {data.assignDate ? data.assignDate.slice(0, 10) : ""}
               </div>
             </div>
-            <div style={{ padding: "10px", borderLeft: ".5px solid black" }}>
-              {" "}
-              موقف مقدم الطلب / {data.beneficiary ? "مستفيد" : "غير مستفيد"}
+            <div className={style.def}>
+              <div>
+                {" "}
+                {rf
+                  ? `تاريخ ادخال البيانات / ${data.createdAt.slice(0, 10)}`
+                  : `/ تاريخ ادخال البيانات`}
+              </div>
+              <div style={{ padding: "10px", borderLeft: ".5px solid black" }}>
+                {" "}
+                موقف مقدم الطلب / {data.beneficiary ? "مستفيد" : "غير مستفيد"}
+              </div>
             </div>
-            <div style={{ padding: "10px", borderLeft: ".5px solid black",fontSize:'14px' }}>
+
+            <div
+              style={{
+                padding: "10px",
+                borderLeft: ".5px solid black",
+                fontSize: "14px",
+              }}
+            >
               {" "}
-              {data.note != ""?`ملاحظه / ${data.note}`: `/ ملاحظه`}
+              {data.note != "" ? `ملاحظه / ${data.note}` : `/ ملاحظه`}
             </div>
           </div>
           <p className={style.notice} style={{ marginBottom: mb1 }}>

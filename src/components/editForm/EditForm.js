@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 import { useParams } from "react-router-dom";
 import { Nav } from "../Nav/Nav";
 export const EditForm = () => {
-  let {id} = useParams()
+  let { id } = useParams();
   //let id = "6473cc4181abf05ca86eca2a";
   const [mydata, setMyData] = useState(null);
   const [address, setAdress] = useState([]);
@@ -30,7 +30,7 @@ export const EditForm = () => {
       if (res.status == 200) {
         res = await res.json();
         setMyData(res);
-       // console.log(res);
+        // console.log(res);
       }
 
       res = await fetch("https://smv.onrender.com/class/", {
@@ -44,7 +44,7 @@ export const EditForm = () => {
         let tmp = [],
           tmp2 = [];
         res.map((item) => {
-       //   console.log(item);
+          //   console.log(item);
           if (item.type == "address") tmp.push(item);
           else tmp2.push(item);
         });
@@ -75,17 +75,17 @@ export const EditForm = () => {
     console.log(res.status);
     if (res.status == 200) {
       res = await res.json();
-   //   console.log(res);
-      window.location.replace('/forms');
+      //   console.log(res);
+      window.location.replace("/forms");
     } else {
-   //   console.log(res);
+      //   console.log(res);
       window.location.replace("/");
     }
   };
   if (!data || !mydata) return <div className={style.loader}></div>;
   return (
     <>
-      <Nav name = "تعديل استماره"/>
+      <Nav name="تعديل استماره" />
       <div className={style.Acontainer}>
         <form className={style.Form} onSubmit={handelSumbit}>
           <h1 style={{ marginTop: "50px" }}>تعديل استماره </h1>
@@ -248,6 +248,13 @@ export const EditForm = () => {
         ></input> */}
           {/*<label> رقم الاستماره </label>
         <input type="text" placeholder={num} disabled></input>*/}
+          <label> الملاحظه </label>
+          <input
+            type="text"
+            onChange={(e) => {
+              setData({ ...data, note: e.target.value });
+            }}
+          ></input>
           <label>
             <div
               style={{

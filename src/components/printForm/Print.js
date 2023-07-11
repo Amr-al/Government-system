@@ -18,6 +18,7 @@ export const Print = (props) => {
       new Date().getMonth() + 1
     }-${new Date().getFullYear()}`
   );
+  const [rf, setRef] = useState(false);
   const handelPrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: "SMV",
@@ -34,21 +35,20 @@ export const Print = (props) => {
       setMyData({ husbandName: props.husbandName, fullName: props.fullName });
     } else {
       let get = async () => {
-        let res = await fetch(
-          `https://smv.onrender.com/form/${id}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `token ${token}`,
-            },
-          }
-        );
-        console.log(res);
+        let res = await fetch(`https://smv.onrender.com/form/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `token ${token}`,
+          },
+        });
+        // console.log(res);
 
         if (res.status == 200) {
           res = await res.json();
-          // console.log(res);
+          const date1 = new Date(res.createdAt.slice(0, 10));
+          const date2 = new Date("2023-07-11");
+          if (date1 > date2) setRef(true);
           setMyData(res);
         }
       };
@@ -83,6 +83,7 @@ export const Print = (props) => {
     }
   };
   if (!data) return <div className={style.loader}></div>;
+
   return (
     <>
       <div className={style.nav}>
@@ -185,13 +186,28 @@ export const Print = (props) => {
                   : `/ تاريخ التخصيص`}
               </div>
             </div>
-            <div style={{ padding: "10px", borderLeft: ".5px solid black" }}>
-              {" "}
-              موقف مقدم الطلب / {data.beneficiary ? "مستفيد" : "غير مستفيد"}
+            <div className={style.def}>
+              <div>
+                {" "}
+                {rf
+                  ? `تاريخ ادخال البيانات / ${data.createdAt.slice(0, 10)}`
+                  : `/ تاريخ ادخال البيانات`}
+              </div>
+              <div style={{ padding: "10px", borderLeft: ".5px solid black" }}>
+                {" "}
+                موقف مقدم الطلب / {data.beneficiary ? "مستفيد" : "غير مستفيد"}
+              </div>
             </div>
-            <div style={{ padding: "10px", borderLeft: ".5px solid black",fontSize:'12px' }}>
+
+            <div
+              style={{
+                padding: "10px",
+                borderLeft: ".5px solid black",
+                fontSize: "12px",
+              }}
+            >
               {" "}
-              {data.note != ""?`ملاحظه / ${data.note}`: `/ ملاحظه`}
+              {data.note != "" && data.note ? `ملاحظه / ${data.note}` : `/ ملاحظه`}
             </div>
           </div>
           <p className={style.notice} style={{ marginBottom: mb1 }}>
@@ -289,7 +305,7 @@ export const Print = (props) => {
               : `: رقم الاستمارة `}{" "}
           </div>
           <div> موقف المقدم : {data.beneficiary ? "مستفيد" : "غير مستفيد"}</div>
-          <div>تاريخ الانشاء : {date}</div>
+          <div>تاريخ الانشاء : {data.createdAt.slice(0,10)}</div>
           {props.fullName || props.husbandName ? (
             <button
               onClick={id ? handelPrint : handelClick}
