@@ -75,7 +75,12 @@ export const Print = (props) => {
     );
     if (res.status == 200) {
       //   res = await res.json()
-      // console.log(data);
+       console.log(data);
+       if (res.data.createdAt) {
+        const date1 = new Date(res.data.createdAt.slice(0, 10));
+        const date2 = new Date("2023-07-11");
+        if (date1 > date2) setRef(true);
+      }
       setId(res.data);
       setMyData(res.data);
 
