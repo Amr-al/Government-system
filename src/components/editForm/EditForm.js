@@ -83,6 +83,7 @@ export const EditForm = () => {
     }
   };
   if (!data || !mydata) return <div className={style.loader}></div>;
+  // console.log(mydata)
   return (
     <>
       <Nav name="تعديل استماره" />
@@ -251,6 +252,7 @@ export const EditForm = () => {
           <label> الملاحظه </label>
           <input
             type="text"
+            placeholder={mydata.note?mydata.note : ""}
             onChange={(e) => {
               setData({ ...data, note: e.target.value });
             }}

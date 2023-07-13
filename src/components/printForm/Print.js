@@ -46,9 +46,11 @@ export const Print = (props) => {
 
         if (res.status == 200) {
           res = await res.json();
-          const date1 = new Date(res.createdAt.slice(0, 10));
-          const date2 = new Date("2023-07-11");
-          if (date1 > date2) setRef(true);
+          if (res.createdAt) {
+            const date1 = new Date(res.createdAt.slice(0, 10));
+            const date2 = new Date("2023-07-11");
+            if (date1 > date2) setRef(true);
+          }
           setMyData(res);
         }
       };
@@ -83,6 +85,7 @@ export const Print = (props) => {
     }
   };
   if (!data) return <div className={style.loader}></div>;
+  console.log(data);
 
   return (
     <>
@@ -207,7 +210,9 @@ export const Print = (props) => {
               }}
             >
               {" "}
-              {data.note != "" && data.note ? `ملاحظه / ${data.note}` : `/ ملاحظه`}
+              {data.note != "" && data.note
+                ? `ملاحظه / ${data.note}`
+                : `/ ملاحظه`}
             </div>
           </div>
           <p className={style.notice} style={{ marginBottom: mb1 }}>
@@ -305,7 +310,7 @@ export const Print = (props) => {
               : `: رقم الاستمارة `}{" "}
           </div>
           <div> موقف المقدم : {data.beneficiary ? "مستفيد" : "غير مستفيد"}</div>
-          <div>تاريخ الانشاء : {data.createdAt.slice(0,10)}</div>
+          {data.createdAt?<div>تاريخ الانشاء : {data.createdAt.slice(0, 10)}</div>:<>تاريخ الانشاء : </>}
           {props.fullName || props.husbandName ? (
             <button
               onClick={id ? handelPrint : handelClick}
